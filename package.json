@@ -1,0 +1,24 @@
+{
+  "scripts": {
+    "dev": "node --watch ./server.js",
+    "db:init": "npx sequelize-cli init",
+    "db:migrate": "npx sequelize db:migrate",
+    "db:migrate:undo": "npx sequelize db:migrate:undo",
+    "db:migrate:undo:all": "npx sequelize db:migrate:undo:all",
+    "db:seed": "npx sequelize db:seed",
+    "db:seed:all": "npx sequelize db:seed:all",
+    "db:seed:undo": "npx sequelize db:seed:undo",
+    "db:seed:undo:all": "npx sequelize db:seed:undo:all",
+    "migration:generate": "npx sequelize-cli migration:generate --name",
+    "seed:generate": "npx sequelize-cli seed:generate --name"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1",
+    "sequelize": "^6.37.7",
+    "sequelize-cli": "^6.6.3"
+  }
+}
