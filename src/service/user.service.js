@@ -8,12 +8,12 @@ class UsersService {
 
   async getById(id) {
     const user = await User.findByPk(id, {
-      include: [
-        {
-          model: Post,
-          as: "posts",
-        },
-      ],
+      // include: [
+      //   {
+      //     model: Post,
+      //     as: "posts",
+      //   },
+      // ],
     });
     return user;
   }

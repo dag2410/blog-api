@@ -1,26 +1,26 @@
 const usersService = require("../service/user.service");
+const { success } = require("../utils/response");
 
 exports.getList = async (req, res) => {
   const users = await usersService.getAll();
-  res.json(users);
+  success(res, 200, users);
 };
 
 exports.getOne = async (req, res) => {
-  const user = await usersService.getById(req.params.id);
-  res.json(user);
+  success(res, 200, req.user);
 };
 
 exports.create = async (req, res) => {
   const user = await usersService.create(req.body);
-  res.json(user);
+  success(res, 201, user);
 };
 
 exports.update = async (req, res) => {
-  const user = await usersService.update(req.params.id, req.body);
-  res.json(user);
+  const user = await usersService.update(req.user.id, req.body);
+  success(res, 200, user);
 };
 
 exports.remove = async (req, res) => {
-  await usersService.remove(req.params.id);
-  return res.status(204).send();
+  await usersService.remove(req.user.id);
+  success(res, 200);
 };
