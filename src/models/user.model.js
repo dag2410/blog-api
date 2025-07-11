@@ -7,9 +7,13 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
+      first_name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      last_name: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -60,6 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "post_id",
       as: "posts",
     });
+    User.hasMany(models.RefreshToken);
   };
 
   return User;

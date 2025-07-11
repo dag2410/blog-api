@@ -1,15 +1,15 @@
 const express = require("express");
-const userController = require("../controller/user.controller");
+const usersController = require("../controller/user.controller");
 const attachResourceLoader = require("../utils/attachResourceLoader");
 
 const router = express.Router();
 attachResourceLoader(router, ["user"]);
 
-router.get("/", userController.getList);
-router.get("/:user", userController.getOne);
-router.post("/", userController.create);
-router.put("/:user", userController.update);
-router.patch("/:user", userController.update);
-router.delete("/:user", userController.remove);
+router.get("/", usersController.getList);
+router.get("/:user", usersController.getOne);
+// router.post("/", usersController.create);
+router.put("/:user", usersController.update);
+router.patch("/:user", usersController.update);
+router.delete("/:user", usersController.remove);
 
 module.exports = router;

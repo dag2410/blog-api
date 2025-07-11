@@ -9,7 +9,8 @@ module.exports = {
     const users = [];
     for (let i = 0; i < 10; i++) {
       users.push({
-        name: faker.person.fullName(),
+        first_name: faker.person.fullName(),
+        last_name: faker.person.lastName(),
         email: faker.internet.email(),
         password: faker.internet.password(),
         phone: faker.phone.number(),

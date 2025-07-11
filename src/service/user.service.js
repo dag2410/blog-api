@@ -1,20 +1,13 @@
-const { User, Post } = require("../models");
+const { User } = require("../models");
 
-class UsersService {
+class UserService {
   async getAll() {
     const users = await User.findAll();
     return users;
   }
 
   async getById(id) {
-    const user = await User.findByPk(id, {
-      // include: [
-      //   {
-      //     model: Post,
-      //     as: "posts",
-      //   },
-      // ],
-    });
+    const user = await User.findByPk(id);
     return user;
   }
 
@@ -37,4 +30,4 @@ class UsersService {
   }
 }
 
-module.exports = new UsersService();
+module.exports = new UserService();
