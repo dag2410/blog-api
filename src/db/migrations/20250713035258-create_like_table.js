@@ -1,29 +1,36 @@
 "use strict";
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("refresh_tokens", {
+    await queryInterface.createTable("likes", {
       id: {
-        type: Sequelize.BIGINT,
-        primaryKey: true,
+        type: Sequelize.INTEGER({
+          unsigned: true,
+        }),
         autoIncrement: true,
+        primaryKey: true,
       },
       user_id: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.INTEGER({
+          unsigned: true,
+        }),
         allowNull: false,
         references: {
           model: "users",
           key: "id",
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
-      token: {
-        type: Sequelize.STRING,
+      likeable_type: {
+        type: Sequelize.STRING(50),
         allowNull: false,
-        unique: true,
       },
-      expired_at: {
-        type: Sequelize.DATE,
+      likeable_id: {
+        type: Sequelize.INTEGER({
+          unsigned: true,
+        }),
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -35,8 +42,7 @@ module.exports = {
       },
     });
   },
-
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("refresh_tokens");
+    await queryInterface.dropTable("likes");
   },
 };
