@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const commentRouter = require("./comment.route");
-const postRouter = require("./post.route");
-const authRouter = require("./auth.route");
-const userRouter = require("./user.route");
-const topicRouter = require("./topic.route");
+const commentRouter = require("@/routes/comment.route");
+const postRouter = require("@/routes/post.route");
+const authRouter = require("@/routes/auth.route");
+const userRouter = require("@/routes/user.route");
+const topicRouter = require("@/routes/topic.route");
 
 router.use("/comments", commentRouter);
 router.use("/posts", postRouter);

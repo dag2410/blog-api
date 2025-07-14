@@ -1,5 +1,5 @@
-const commentsService = require("../service/comment.service");
-const { success } = require("../utils/response");
+const commentsService = require("@/service/comment.service");
+const { success } = require("@/utils/response");
 
 exports.getList = async (req, res) => {
   const comments = await commentsService.getAll();

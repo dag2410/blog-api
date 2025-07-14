@@ -1,4 +1,4 @@
-const response = require("../utils/response");
+const response = require("@/utils/response");
 function handleError(error, req, res, next) {
   response.error(res, error.status ?? 500, error.toString(), error.errors);
 }

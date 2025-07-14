@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET, JWT_EXPIRES_IN, TOKEN_TYPE } = require("../config/auth");
+const { JWT_SECRET, JWT_EXPIRES_IN, TOKEN_TYPE } = require("@/config/auth");
 
 const generateAccessToken = (userId) => {
   const token = jwt.sign({ userId }, JWT_SECRET, {

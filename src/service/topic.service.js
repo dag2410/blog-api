@@ -1,4 +1,4 @@
-const { Topic, Post } = require("../models");
+const { Topic, Post } = require("@/models");
 
 class TopicsService {
   async getAll() {

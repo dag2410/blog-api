@@ -1,6 +1,6 @@
 const express = require("express");
-const postController = require("../controller/post.controller");
-const attachResourceLoader = require("../utils/attachResourceLoader");
+const postController = require("@/controller/post.controller");
+const attachResourceLoader = require("@/utils/attachResourceLoader");
 
 const router = express.Router();
 attachResourceLoader(router, ["post"]);

@@ -1,9 +1,10 @@
 require("dotenv").config();
+require("module-alias/register");
 const express = require("express");
 const cors = require("cors");
-const router = require("./src/routes");
-const handleErrors = require("./src/middleware/handleError");
-const notFoundHandler = require("./src/middleware/notFoundHandler");
+const router = require("@/routes");
+const handleErrors = require("@/middleware/handleError");
+const notFoundHandler = require("@/middleware/notFoundHandler");
 const app = express();
 const port = 3001;
 

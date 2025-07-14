@@ -1,6 +1,6 @@
-const { error } = require("../utils/response");
-const { User } = require("../models");
-const jwtService = require("../service/jwtService");
+const { error } = require("@/utils/response");
+const { User } = require("@/models");
+const jwtService = require("@/service/jwtService");
 
 async function checkAuth(req, res, next) {
   try {

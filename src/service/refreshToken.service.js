@@ -1,6 +1,6 @@
-const generateToken = require("../utils/generateToken");
-const { RefreshToken } = require("../models");
-const { REFRESH_TOKEN_EXPIRES_IN } = require("../config/auth");
+const generateToken = require("@/utils/generateToken");
+const { RefreshToken } = require("@/models");
+const { REFRESH_TOKEN_EXPIRES_IN } = require("@/config/auth");
 const { Op } = require("sequelize");
 
 const generateUniqueToken = async () => {

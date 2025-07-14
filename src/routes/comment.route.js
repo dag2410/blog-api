@@ -1,6 +1,6 @@
 const express = require("express");
-const commentsController = require("../controller/comment.controller");
-const attachResourceLoader = require("../utils/attachResourceLoader");
+const commentsController = require("@/controller/comment.controller");
+const attachResourceLoader = require("@/utils/attachResourceLoader");
 
 const router = express.Router();
 attachResourceLoader(router, ["comment"]);

@@ -1,5 +1,5 @@
-const { verifyToken } = require("../service/jwtService");
-const { error } = require("../utils/response");
+const { verifyToken } = require("@/service/jwtService");
+const { error } = require("@/utils/response");
 
 module.exports = (req, res, next) => {
   const token = req.cookies.token;
@@ -11,5 +11,5 @@ module.exports = (req, res, next) => {
     req.user = decoded;
   } catch (error) {
     error(res, 401, "Token không hợp lệ");
-  } 
+  }
 };

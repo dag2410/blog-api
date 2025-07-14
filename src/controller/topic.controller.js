@@ -1,5 +1,5 @@
-const topicsService = require("../service/topic.service");
-const { success } = require("../utils/response");
+const topicsService = require("@/service/topic.service");
+const { success } = require("@/utils/response");
 
 exports.getList = async (req, res) => {
   const topics = await topicsService.getAll();

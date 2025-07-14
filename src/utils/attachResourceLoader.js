@@ -1,10 +1,10 @@
-const throwError = require("./throwError");
+const throwError = require("@/utils/throwError");
 
 const models = {
-  user: require("../service/user.service"),
-  post: require("../service/post.service"),
-  comment: require("../service/comment.service"),
-  topic: require("../service/topic.service"),
+  user: require("@/service/user.service"),
+  post: require("@/service/post.service"),
+  comment: require("@/service/comment.service"),
+  topic: require("@/service/topic.service"),
 };
 function attachResourceLoader(router, params) {
   params.forEach((param) => {

@@ -1,7 +1,7 @@
-const { User } = require("../models");
-const { hash, compare } = require("../utils/bcrypt");
-const jwtService = require("./jwtService");
-const refreshTokenService = require("../service/refreshToken.service");
+const { User } = require("@/models");
+const { hash, compare } = require("@/utils/bcrypt");
+const jwtService = require("@/service/jwtService");
+const refreshTokenService = require("@/service/refreshToken.service");
 
 class AuthService {
   async register(email, password, firstName, lastName) {

@@ -1,6 +1,6 @@
-const authService = require("../service/auth.service");
-const usersService = require("../service/auth.service");
-const { success, error } = require("../utils/response");
+const authService = require("@/service/auth.service");
+const usersService = require("@/service/auth.service");
+const { success, error } = require("@/utils/response");
 
 exports.me = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-const { Post, Comment } = require("../models");
+const { Post, Comment } = require("@/models");
 
 class PostsService {
   async getAll() {

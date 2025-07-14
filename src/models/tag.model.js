@@ -17,12 +17,12 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Tag.associate = (models) => {
-    Tag.belongsToMany(models.Post, {
-      through: models.PostTag,
-      foreignKey: "tag_id",
-      otherKey: "post_id",
-      as: "posts",
-    });
+    // Tag.belongsToMany(models.Post, {
+    //   through: models.PostTag,
+    //   foreignKey: "tag_id",
+    //   otherKey: "post_id",
+    //   as: "posts",
+    // });
   };
 
   return Tag;
