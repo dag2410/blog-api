@@ -7,9 +7,6 @@ class AuthService {
   async register(email, password, firstName, lastName) {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) throw new Error("Email đã được sử dụng");
-    if (!email || !password || !firstName || !lastName) {
-      throw new Error("Thông tin đăng ký không hợp lệ");
-    }
 
     const user = await User.create({
       email,

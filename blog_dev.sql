@@ -22,9 +22,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `post_id` bigint(20) NOT NULL,
+  `id` INTEGER(20) NOT NULL AUTO_INCREMENT,
+  `user_id` INTEGER(20) NOT NULL,
+  `post_id` INTEGER(20) NOT NULL,
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NULL DEFAULT NULL,
   `updated_at` datetime NULL DEFAULT NULL,
@@ -140,7 +140,7 @@ INSERT INTO `comments` VALUES (100, 6, 50, 'Verumtamen consectetur aequitas. Fug
 -- ----------------------------
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` INTEGER(20) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `summary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -433,7 +433,7 @@ INSERT INTO `sequelizemeta` VALUES ('20250626020136-create_topic_post_table.js')
 -- ----------------------------
 DROP TABLE IF EXISTS `topics`;
 CREATE TABLE `topics`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` INTEGER(20) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NULL DEFAULT NULL,
   `updated_at` datetime NULL DEFAULT NULL,
@@ -454,8 +454,8 @@ INSERT INTO `topics` VALUES (5, 'vesper curatio auditor', '2025-06-26 11:07:05',
 -- ----------------------------
 DROP TABLE IF EXISTS `topics_posts`;
 CREATE TABLE `topics_posts`  (
-  `topic_id` bigint(20) NOT NULL,
-  `post_id` bigint(20) NOT NULL,
+  `topic_id` INTEGER(20) NOT NULL,
+  `post_id` INTEGER(20) NOT NULL,
   `created_at` datetime NULL DEFAULT NULL,
   `updated_at` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`topic_id`, `post_id`) USING BTREE,
@@ -570,7 +570,7 @@ INSERT INTO `topics_posts` VALUES (5, 95, '2025-06-26 11:07:05', '2025-06-26 11:
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` INTEGER(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -615,8 +615,8 @@ INSERT INTO `users` VALUES (20, 'Diane Beier', 'Triston.Conroy@hotmail.com', '3_
 -- ----------------------------
 DROP TABLE IF EXISTS `users_posts`;
 CREATE TABLE `users_posts`  (
-  `user_id` bigint(20) NOT NULL,
-  `post_id` bigint(20) NOT NULL,
+  `user_id` INTEGER(20) NOT NULL,
+  `post_id` INTEGER(20) NOT NULL,
   `created_at` datetime NULL DEFAULT NULL,
   `updated_at` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`, `post_id`) USING BTREE,

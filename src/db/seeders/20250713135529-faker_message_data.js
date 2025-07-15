@@ -18,7 +18,7 @@ module.exports = {
         conversation_id: userConversation.conversation_id,
         type: faker.helpers.arrayElement(["text", "image", "file"]),
         content: faker.lorem.sentence(),
-        delete_at: null,
+        deleted_at: null,
         created_at: faker.date.past(),
         updated_at: new Date(),
       });

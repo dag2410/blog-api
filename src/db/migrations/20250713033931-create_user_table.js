@@ -102,6 +102,10 @@ module.exports = {
         allowNull: true,
         defaultValue: null,
       },
+      email_send_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
       verified_at: {
         type: Sequelize.DATE,
         allowNull: true,

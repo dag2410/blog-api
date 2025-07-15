@@ -3,12 +3,12 @@ module.exports = (sequelize, DataTypes) => {
     "UserSetting",
     {
       id: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
       user_id: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.INTEGER,
         unique: true,
         allowNull: false,
       },
