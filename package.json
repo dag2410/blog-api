@@ -1,5 +1,7 @@
 {
   "scripts": {
+    "queue": "node --watch ./src/workers/queueWorker.js",
+    "schedule": "node --watch ./src/tasks/index.js",
     "dev": "node --watch ./server.js",
     "db:init": "npx sequelize-cli init",
     "db:migrate": "npx sequelize db:migrate",
@@ -17,11 +19,13 @@
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
     "jsonwebtoken": "^9.0.2",
     "module-alias": "^2.2.3",
     "mysql2": "^3.14.1",
+    "node-cron": "^4.2.1",
     "nodemailer": "^7.0.5",
     "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.3"

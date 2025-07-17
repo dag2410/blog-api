@@ -85,6 +85,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
+      email_send_at: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
       verified_at: {
         type: DataTypes.DATE,
         allowNull: true,

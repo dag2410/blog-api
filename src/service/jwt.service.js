@@ -5,6 +5,7 @@ const generateAccessToken = (userId) => {
   const token = jwt.sign({ userId }, JWT_SECRET, {
     expiresIn: JWT_EXPIRES_IN,
   });
+
   return {
     userId,
     accessToken: token,
