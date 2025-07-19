@@ -53,3 +53,18 @@ exports.forgotPassword = async (req, res) => {
 exports.resetPassword = async (req, res) => {
   error(res, 501, "Chức năng chưa được hỗ trợ");
 };
+
+exports.verifyEmail = async (req, res) => {
+  try {
+    const token = req.query.token;
+    if (!token) error(res, 400, "Xác thực thất bại");
+    await authService.verifyEmail(token);
+    success(
+      res,
+      200,
+      "Tài khoản của bạn đã được xác thực. Bạn có thể đăng nhập."
+    );
+  } catch (err) {
+    error(res, 400, "Xác thực thất bại, bạn vui lòng thử lại.");
+  }
+};

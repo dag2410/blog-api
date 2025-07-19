@@ -10,6 +10,7 @@ const {
 const router = express.Router();
 
 router.get("/profile", checkAuth, authController.me);
+router.get("/verify-email", authController.verifyEmail);
 router.post("/register", registerValidator, authController.register);
 router.post("/login", loginValidator, authController.login);
 router.post("/refresh", authController.refreshToken);

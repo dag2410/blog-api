@@ -35,7 +35,7 @@ const findValidRefreshToken = async (token) => {
     where: {
       token: token,
       expired_at: {
-        [Op.gte]: Date.now(),
+        [Op.gte]: new Date(),
       },
     },
   });

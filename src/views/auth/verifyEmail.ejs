@@ -53,12 +53,7 @@
               border-radius: 50%;
               border-top-color: transparent;
             "
-          >
-            <img
-              src="http://localhost:3000/api/v1/users/<%= userId %>/email-image.jpg"
-              alt=""
-            />
-          </div>
+          ></div>
         </div>
         <h1
           style="
@@ -93,7 +88,7 @@
               font-weight: 600;
             "
           >
-            Chào <span style="color: #667eea"><%= user?.name %></span>!
+            Chào <span style="color: #667eea"><%= user.last_name %></span>!
           </h2>
           <p style="color: #666666; margin: 0; font-size: 16px">
             Cảm ơn bạn đã đăng ký tài khoản. Để hoàn tất quá trình đăng ký, vui
@@ -123,10 +118,10 @@
           </h3>
           <p style="margin: 8px 0; color: #555555; font-size: 14px">
             <strong>Email:</strong>
-            <span style="color: #667eea"><%= user?.email %></span>
+            <span style="color: #667eea"><%= user.email %></span>
           </p>
           <p style="margin: 8px 0; color: #555555; font-size: 14px">
-            <strong>Thời gian đăng ký:</strong> [REGISTRATION_TIME]
+            <strong>Thời gian đăng ký: <%= created_at_format %></strong>
           </p>
         </div>
 
@@ -161,26 +156,7 @@
             padding: 20px;
             margin: 25px 0;
           "
-        >
-          <p style="color: #666666; margin: 0 0 10px; font-size: 14px">
-            <strong>Không thể nhấn nút trên?</strong> Sao chép và dán link sau
-            vào trình duyệt:
-          </p>
-          <p
-            style="
-              margin: 0;
-              word-break: break-all;
-              font-size: 12px;
-              color: #667eea;
-              background-color: #ffffff;
-              padding: 8px;
-              border-radius: 4px;
-              border: 1px dashed #ddd;
-            "
-          >
-            [VERIFICATION_LINK]
-          </p>
-        </div>
+        ></div>
 
         <!-- Cảnh báo bảo mật -->
         <div
@@ -194,7 +170,7 @@
         >
           <p style="margin: 0; color: #856404; font-size: 14px">
             <strong>🔐 Lưu ý bảo mật:</strong> Link xác thực này sẽ hết hạn sau
-            <strong>24 giờ</strong>. Nếu bạn không thực hiện đăng ký này, vui
+            <strong>10 phút</strong>. Nếu bạn không thực hiện đăng ký này, vui
             lòng bỏ qua email này.
           </p>
         </div>
@@ -213,17 +189,17 @@
           </p>
           <div style="display: inline-flex; gap: 15px; align-items: center">
             <a
-              href="mailto:support@company.com"
+              href="mailto:dagger241004abc@gmail.com"
               style="color: #667eea; text-decoration: none; font-size: 14px"
             >
-              📧 support@company.com
+              📧 dagger241004abc@gmail.com
             </a>
             <span style="color: #ddd">|</span>
             <a
               href="tel:+84123456789"
               style="color: #667eea; text-decoration: none; font-size: 14px"
             >
-              📞 (+84) 123-456-789
+              📞 (+84) 397 546 472
             </a>
           </div>
         </div>
@@ -240,7 +216,7 @@
       >
         <div style="margin-bottom: 20px">
           <h3 style="margin: 0 0 10px; font-size: 20px; color: #ffffff">
-            [TÊN CÔNG TY]
+            HaiDangCom
           </h3>
           <p style="margin: 0; color: #bdc3c7; font-size: 14px">
             Nền tảng công nghệ hàng đầu
@@ -307,10 +283,10 @@
           "
         >
           <p style="margin: 0 0 8px; color: #bdc3c7; font-size: 12px">
-            © 2025 [TÊN CÔNG TY]. Bảo lưu mọi quyền.
+            © 2025 HaiDangCom. Bảo lưu mọi quyền.
           </p>
           <p style="margin: 0; color: #95a5a6; font-size: 11px">
-            [ĐỊA CHỈ CÔNG TY]
+            Thành Công Ba Đình Hà Nội
           </p>
           <div style="margin-top: 15px">
             <a

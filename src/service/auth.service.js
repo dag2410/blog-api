@@ -3,6 +3,8 @@ const { hash, compare } = require("@/utils/bcrypt");
 const jwtService = require("@/service/jwt.service");
 const refreshTokenService = require("@/service/refreshToken.service");
 const queue = require("@/utils/queue");
+const { verifyEmailToken } = require("@/service/jwt.service");
+const { where } = require("sequelize");
 
 class AuthService {
   async register(email, password, firstName, lastName) {
@@ -23,6 +25,16 @@ class AuthService {
     const user = await User.findOne({ where: { email } });
     const tokenData = jwtService.generateAccessToken(user.id);
     const refreshToken = await refreshTokenService.createRefreshToken(user.id);
+    await User.update(
+      {
+        last_login: new Date(),
+      },
+      {
+        where: {
+          id: user.id,
+        },
+      }
+    );
     return {
       ...tokenData,
       refresh_token: refreshToken.token,
@@ -51,6 +63,22 @@ class AuthService {
       ...tokenData,
       refresh_token: newRefreshToken.token,
     };
+  }
+  async verifyEmail(token) {
+    try {
+      const verify = verifyEmailToken(token);
+      const userId = verify.userId;
+      await User.update(
+        { verified_at: new Date() },
+        {
+          where: {
+            id: userId,
+          },
+        }
+      );
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 }
 
