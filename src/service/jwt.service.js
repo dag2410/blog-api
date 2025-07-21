@@ -15,7 +15,7 @@ const generateAccessToken = (userId) => {
   return {
     userId,
     accessToken: token,
-    token_type: TOKEN_TYPE,
+    tokenType: TOKEN_TYPE,
     expiresIn: JWT_EXPIRES_IN,
   };
 };

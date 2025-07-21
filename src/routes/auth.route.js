@@ -13,16 +13,21 @@ router.get("/profile", checkAuth, authController.me);
 router.get("/verify-email", authController.verifyEmail);
 router.post("/register", registerValidator, authController.register);
 router.post("/login", loginValidator, authController.login);
+router.post("/logout", checkAuth, authController.logout);
 router.post("/refresh", authController.refreshToken);
-router.post(
-  "/reset-password",
-  resetPasswordValidator,
-  authController.resetPassword
-);
+
 router.post(
   "/forgot-password",
   forgotPasswordValidator,
   authController.forgotPassword
+);
+
+router.get("/reset-password", authController.verifyEmail);
+
+router.post(
+  "/reset-password",
+  resetPasswordValidator,
+  authController.resetPassword
 );
 
 module.exports = router;

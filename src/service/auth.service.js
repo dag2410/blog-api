@@ -1,5 +1,5 @@
-const { User } = require("@/models");
-const { hash, compare } = require("@/utils/bcrypt");
+const { User, RefreshToken } = require("@/models");
+const { hash } = require("@/utils/bcrypt");
 const jwtService = require("@/service/jwt.service");
 const refreshTokenService = require("@/service/refreshToken.service");
 const queue = require("@/utils/queue");
@@ -43,16 +43,60 @@ class AuthService {
 
   async update(userId, data) {
     const user = await User.findByPk(userId);
-    if (!user) throw new Error("User không tồn tại");
+    if (!user) throw new Error("User không tồn tại.");
     await user.update(data);
     return user;
+  }
+
+  async logout(userId) {
+    const user = await User.findByPk(userId);
+    if (!user) throw new Error("User không tồn tại.");
+    await RefreshToken.destroy({
+      where: {
+        user_id: user.id,
+      },
+    });
+    return { message: "Đăng xuất thành công." };
+  }
+
+  async forgotPassword(email) {
+    const user = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    if (!user) throw new Error("Email không tồn tại.");
+    queue.dispatch("sendVerifyEmailJob", {
+      userId: user.id,
+      type: "reset-password",
+    });
+  }
+
+  async resetPassword(password, token) {
+    const { userId } = verifyEmailToken(token);
+    const user = await User.findOne({
+      where: {
+        id: userId,
+      },
+    });
+    if (!user) throw new Error("Người dùng không tồn tại.");
+    await User.update(
+      {
+        password: await hash(password),
+      },
+      {
+        where: {
+          id: user.id,
+        },
+      }
+    );
   }
 
   async refreshAccessToken(refreshTokenString) {
     const refreshToken = await refreshTokenService.findValidRefreshToken(
       refreshTokenString
     );
-    if (!refreshToken) throw new Error("Refresh token không hợp lệ");
+    if (!refreshToken) throw new Error("Refresh token không hợp lệ.");
     const tokenData = jwtService.generateAccessToken(refreshToken.user_id);
     await refreshTokenService.deleteRefreshToken(refreshToken);
     const newRefreshToken = await refreshTokenService.createRefreshToken(
@@ -64,6 +108,7 @@ class AuthService {
       refresh_token: newRefreshToken.token,
     };
   }
+
   async verifyEmail(token) {
     try {
       const verify = verifyEmailToken(token);

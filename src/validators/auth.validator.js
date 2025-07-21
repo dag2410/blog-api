@@ -2,6 +2,7 @@ const { checkSchema } = require("express-validator");
 const handlerError = require("./handleError");
 const { User } = require("@/models");
 const { compare } = require("@/utils/bcrypt");
+const { where } = require("sequelize");
 
 exports.registerValidator = [
   checkSchema({
@@ -80,28 +81,18 @@ exports.loginValidator = [
         errorMessage: "Email không đúng định dạng",
       },
       normalizeEmail: true,
-      custom: {
-        options: async (value, { req }) => {
-          const user = await User.findOne({
-            where: {
-              email: value,
-            },
-          });
-          if (!user) {
-            throw new Error("Tài khoản email này chưa đăng kí");
-          }
-          req.user = user;
-          return true;
-        },
-      },
     },
     password: {
       notEmpty: true,
       errorMessage: "Mật khẩu không được để trống",
       custom: {
         options: async (value, { req }) => {
-          const user = req.user;
-          const isValid = await compare(value, user.password);
+          const user = await User.findOne({
+            where: { email: req.body.email },
+          });
+          if (!user) throw new Error("Tài khoản này chưa đăng ký.");
+          req.user = user;
+          const isValid = await compare(value, user?.password);
           if (!isValid) throw new Error("Mật khẩu không đúng");
           return true;
         },
@@ -131,8 +122,8 @@ exports.resetPasswordValidator = [
       notEmpty: true,
       errorMessage: "Mật khẩu mới không được để trống",
       isLength: {
-        options: { min: 6 },
-        errorMessage: "Mật khẩu phải có ít nhất 6 ký tự",
+        options: { min: 8 },
+        errorMessage: "Mật khẩu phải có ít nhất 8 ký tự",
       },
       matches: {
         options: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,

@@ -19,10 +19,7 @@ const generateUniqueToken = async () => {
 
 const createRefreshToken = async (userId) => {
   const token = await generateUniqueToken();
-  const current = new Date();
-  const expiredAt = new Date(
-    current.getTime() + REFRESH_TOKEN_EXPIRES_IN * 1000
-  );
+  const expiredAt = new Date(Date.now() + REFRESH_TOKEN_EXPIRES_IN);
   return await RefreshToken.create({
     user_id: userId,
     token: token,
