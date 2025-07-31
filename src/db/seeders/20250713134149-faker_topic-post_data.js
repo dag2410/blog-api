@@ -24,6 +24,8 @@ module.exports = {
         topicsPosts.push({
           post_id: post.id,
           topic_id: topic.id,
+          created_at: faker.date.past(),
+          updated_at: new Date(),
         });
       });
     });

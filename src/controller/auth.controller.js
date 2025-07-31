@@ -37,7 +37,7 @@ exports.login = async (req, res) => {
     const { refresh_token, ...data } = tokenData;
     success(res, 200, data);
   } catch (err) {
-    error(res, 401, "Đăng nhập thất bại.");
+    error(res, 403, err.message);
   }
 };
 
@@ -95,7 +95,7 @@ exports.resetPassword = async (req, res) => {
     await authService.resetPassword(password, token);
     success(res, 200, "Đặt lại mật khẩu thành công");
   } catch (err) {
-    error(res, 401, err.message);
+    error(res, 400, err.message);
   }
 };
 
