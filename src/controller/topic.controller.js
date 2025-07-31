@@ -16,11 +16,15 @@ exports.create = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const topic = await topicsService.update(req.topic.id, req.body);
+  const topic = await topicsService.update(req.topic.slug, req.body);
   success(res, 200, topic);
 };
 
 exports.remove = async (req, res) => {
-  await topicsService.remove(req.topic.id);
+  await topicsService.remove(req.topic.slug);
   success(res, 200);
+};
+exports.getTrendingTopics = async (req, res) => {
+  const trendingTopics = await topicsService.getTrendingTopics();
+  success(res, 200, trendingTopics);
 };

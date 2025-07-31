@@ -69,38 +69,38 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Post.associate = (models) => {
-    // Post.belongsTo(models.User, {
-    //   foreignKey: "user_id",
-    //   as: "user",
-    // });
-    // Post.hasMany(models.Comment, {
-    //   foreignKey: "post_id",
-    //   as: "comments",
-    // });
-    // Post.belongsToMany(models.Topic, {
-    //   through: "topics_posts",
-    //   foreignKey: "post_id",
-    //   otherKey: "topic_id",
-    //   as: "topics",
-    // });
-    // Post.belongsToMany(models.Tag, {
-    //   through: models.PostTag,
-    //   foreignKey: "post_id",
-    //   otherKey: "tag_id",
-    //   as: "tags",
-    // });
-    // Post.hasMany(models.Like, {
-    //   foreignKey: "likeable_id",
-    //   constraints: false,
-    //   scope: {
-    //     likeable_type: "Post",
-    //   },
-    //   as: "likes",
-    // });
-    // Post.hasMany(models.Bookmark, {
-    //   foreignKey: "post_id",
-    //   as: "bookmarks",
-    // });
+    Post.belongsTo(models.User, {
+      foreignKey: "user_id",
+      as: "users",
+    });
+    Post.hasMany(models.Comment, {
+      foreignKey: "post_id",
+      as: "comments",
+    });
+    Post.belongsToMany(models.Topic, {
+      through: "topics_posts",
+      foreignKey: "post_id",
+      otherKey: "topic_id",
+      as: "topics",
+    });
+    Post.belongsToMany(models.Tag, {
+      through: "post_tag",
+      foreignKey: "post_id",
+      otherKey: "tag_id",
+      as: "tags",
+    });
+    Post.hasMany(models.Like, {
+      foreignKey: "likeable_id",
+      constraints: false,
+      scope: {
+        likeable_type: "Post",
+      },
+      as: "likes",
+    });
+    Post.hasMany(models.Bookmark, {
+      foreignKey: "post_id",
+      as: "bookmarks",
+    });
   };
 
   return Post;

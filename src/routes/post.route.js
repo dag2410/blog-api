@@ -6,6 +6,10 @@ const router = express.Router();
 attachResourceLoader(router, ["post"]);
 
 router.get("/", postController.getList);
+router.get("/featured", postController.getFeatured);
+router.get("/recent", postController.getRecent);
+router.get("/related", postController.getRelated);
+router.get("/user/:userId", postController.getUserPosts);
 router.get("/:post", postController.getOne);
 router.post("/", postController.create);
 router.put("/:post", postController.update);

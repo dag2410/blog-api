@@ -6,6 +6,7 @@ const router = express.Router();
 attachResourceLoader(router, ["topic"]);
 
 router.get("/", topicController.getList);
+router.get("/trending", topicController.getTrendingTopics);
 router.get("/:topic", topicController.getOne);
 router.post("/", topicController.create);
 router.put("/:topic", topicController.update);

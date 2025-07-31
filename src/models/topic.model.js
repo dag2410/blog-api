@@ -37,12 +37,13 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Topic.associate = (models) => {
-    // Topic.belongsToMany(models.Post, {
-    //   through: "topics_posts",
-    //   foreignKey: "topic_id",
-    //   otherKey: "post_id",
-    //   as: "posts",
-    // });
+    Topic.belongsToMany(models.Post, {
+      through: "topics_posts",
+      foreignKey: "topic_id",
+      otherKey: "post_id",
+      as: "posts",
+      // attributes: ["id", "post_id", "topic_id"], // Sequelize sẽ tìm `created_at` từ `topics_posts`
+    });
   };
 
   return Topic;
