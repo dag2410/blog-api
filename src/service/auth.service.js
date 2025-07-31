@@ -23,6 +23,11 @@ class AuthService {
 
   async login(email, password) {
     const user = await User.findOne({ where: { email } });
+    if (!user.verified_at) {
+      throw new Error(
+        "Tài khoản của bạn chưa được xác thực. Vui lòng kiểm tra email để xác thực."
+      );
+    }
     const tokenData = jwtService.generateAccessToken(user.id);
     const refreshToken = await refreshTokenService.createRefreshToken(user.id);
     await User.update(

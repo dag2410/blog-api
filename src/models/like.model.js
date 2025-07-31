@@ -24,21 +24,20 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Like.associate = (models) => {
-    // Like.belongsTo(models.User, {
-    //   foreignKey: "user_id",
-    //   as: "user",
-    // });
-    // // Polymorphic associations
-    // Like.belongsTo(models.Post, {
-    //   foreignKey: "likeable_id",
-    //   constraints: false,
-    //   as: "post",
-    // });
-    // Like.belongsTo(models.Comment, {
-    //   foreignKey: "likeable_id",
-    //   constraints: false,
-    //   as: "comment",
-    // });
+    Like.belongsTo(models.User, {
+      foreignKey: "user_id",
+      as: "user",
+    });
+    Like.belongsTo(models.Post, {
+      foreignKey: "likeable_id",
+      constraints: false,
+      as: "post",
+    });
+    Like.belongsTo(models.Comment, {
+      foreignKey: "likeable_id",
+      constraints: false,
+      as: "comment",
+    });
   };
 
   return Like;

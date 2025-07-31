@@ -10,7 +10,6 @@ async function checkAuth(req, res, next) {
     }
     const payload = jwtService.verifyAccessToken(token);
     const user = await User.findOne({
-      attributes: ["id", "email", "created_at"],
       where: { id: payload.userId },
     });
     if (!user) {

@@ -2,7 +2,8 @@ const commentsService = require("@/service/comment.service");
 const { success } = require("@/utils/response");
 
 exports.getList = async (req, res) => {
-  const comments = await commentsService.getAll();
+  const { postId } = req.query;
+  const comments = await commentsService.getAll(postId);
   success(res, 200, comments);
 };
 

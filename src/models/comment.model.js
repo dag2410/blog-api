@@ -37,31 +37,30 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Comment.associate = (models) => {
-    // Comment.belongsTo(models.User, {
-    //   foreignKey: "user_id",
-    //   as: "user",
-    // });
-    // Comment.belongsTo(models.Post, {
-    //   foreignKey: "post_id",
-    //   as: "post",
-    // });
-    // // Self-referencing for parent/child comments
-    // Comment.belongsTo(models.Comment, {
-    //   foreignKey: "parent_id",
-    //   as: "parent",
-    // });
-    // Comment.hasMany(models.Comment, {
-    //   foreignKey: "parent_id",
-    //   as: "replies",
-    // });
-    // Comment.hasMany(models.Like, {
-    //   foreignKey: "likeable_id",
-    //   constraints: false,
-    //   scope: {
-    //     likeable_type: "Comment",
-    //   },
-    //   as: "likes",
-    // });
+    Comment.belongsTo(models.User, {
+      foreignKey: "user_id",
+      as: "user",
+    });
+    Comment.belongsTo(models.Post, {
+      foreignKey: "post_id",
+      as: "post",
+    });
+    Comment.belongsTo(models.Comment, {
+      foreignKey: "parent_id",
+      as: "parent",
+    });
+    Comment.hasMany(models.Comment, {
+      foreignKey: "parent_id",
+      as: "replies",
+    });
+    Comment.hasMany(models.Like, {
+      foreignKey: "likeable_id",
+      constraints: false,
+      scope: {
+        likeable_type: "Comment",
+      },
+      as: "likes",
+    });
   };
 
   return Comment;

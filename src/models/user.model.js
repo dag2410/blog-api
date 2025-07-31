@@ -102,18 +102,18 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = (models) => {
-    // User.hasMany(models.Post, {
-    //   foreignKey: "user_id",
-    //   as: "posts",
-    // });
-    // User.hasMany(models.Comment, {
-    //   foreignKey: "user_id",
-    //   as: "comments",
-    // });
-    // User.hasMany(models.Like, {
-    //   foreignKey: "user_id",
-    //   as: "likes",
-    // });
+    User.hasMany(models.Post, {
+      foreignKey: "user_id",
+      as: "posts",
+    });
+    User.hasMany(models.Comment, {
+      foreignKey: "user_id",
+      as: "comments",
+    });
+    User.hasMany(models.Like, {
+      foreignKey: "user_id",
+      as: "likes",
+    });
     // User.hasMany(models.Bookmark, {
     //   foreignKey: "user_id",
     //   as: "bookmarks",

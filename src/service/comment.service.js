@@ -1,8 +1,19 @@
 const { Comment, User, Post } = require("@/models");
+const { where } = require("sequelize");
 
 class CommentsService {
-  async getAll() {
-    const comments = await Comment.findAll();
+  async getAll(postId) {
+    const comments = await Comment.findAll({
+      where: {
+        post_id: postId,
+      },
+      include: {
+        model: User,
+        as: "user",
+        attributes: ["id", "username", "avatar"],
+      },
+      order: [["created_at", "ASC"]],
+    });
     return comments;
   }
 
