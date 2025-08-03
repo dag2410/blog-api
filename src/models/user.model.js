@@ -114,10 +114,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "user_id",
       as: "likes",
     });
-    // User.hasMany(models.Bookmark, {
-    //   foreignKey: "user_id",
-    //   as: "bookmarks",
-    // });
+    User.hasMany(models.Bookmark, {
+      foreignKey: "user_id",
+      as: "bookmarks",
+    });
     // User.hasMany(models.Message, {
     //   foreignKey: "user_id",
     //   as: "messages",

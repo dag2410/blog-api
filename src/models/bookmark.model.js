@@ -20,14 +20,14 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Bookmark.associate = (models) => {
-    // Bookmark.belongsTo(models.User, {
-    //   foreignKey: "user_id",
-    //   as: "user",
-    // });
-    // Bookmark.belongsTo(models.Post, {
-    //   foreignKey: "post_id",
-    //   as: "post",
-    // });
+    Bookmark.belongsTo(models.User, {
+      foreignKey: "user_id",
+      as: "user",
+    });
+    Bookmark.belongsTo(models.Post, {
+      foreignKey: "post_id",
+      as: "post",
+    });
   };
 
   return Bookmark;

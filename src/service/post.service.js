@@ -1,4 +1,4 @@
-const { Post, Comment, Topic, User, Tag, Like } = require("@/models");
+const { Post, Comment, Topic, User, Tag, Like, Bookmark } = require("@/models");
 const { Op } = require("sequelize");
 
 class PostsService {
@@ -13,6 +13,13 @@ class PostsService {
       {
         model: Like,
         as: "likes",
+        attributes: ["id", "user_id"],
+        where: currentUserId ? { user_id: currentUserId } : undefined,
+        required: false,
+      },
+      {
+        model: Bookmark,
+        as: "bookmarks",
         attributes: ["id", "user_id"],
         where: currentUserId ? { user_id: currentUserId } : undefined,
         required: false,
@@ -78,6 +85,13 @@ class PostsService {
           where: currentUserId ? { user_id: currentUserId } : undefined,
           required: false,
         },
+        {
+          model: Bookmark,
+          as: "bookmarks",
+          attributes: ["id", "user_id"],
+          where: currentUserId ? { user_id: currentUserId } : undefined,
+          required: false,
+        },
       ],
     });
     return post;
@@ -102,7 +116,7 @@ class PostsService {
     return post;
   }
 
-  async getByUserId(userId, page = 1, limit = 10) {
+  async getByUserId(userId, page = 1, limit = 10, currentUserId = null) {
     const offset = (page - 1) * limit;
 
     const { rows: items, count: total } = await Post.findAndCountAll({
@@ -112,6 +126,25 @@ class PostsService {
           model: Topic,
           as: "topics",
           through: { attributes: [] },
+        },
+        {
+          model: User,
+          as: "users",
+          attributes: ["id", "username", "email", "avatar"],
+        },
+        {
+          model: Like,
+          as: "likes",
+          attributes: ["id", "user_id"],
+          where: currentUserId ? { user_id: currentUserId } : undefined,
+          required: false,
+        },
+        {
+          model: Bookmark,
+          as: "bookmarks",
+          attributes: ["id", "user_id"],
+          where: currentUserId ? { user_id: currentUserId } : undefined,
+          required: false,
         },
       ],
       limit,
@@ -144,6 +177,13 @@ class PostsService {
           where: currentUserId ? { user_id: currentUserId } : undefined,
           required: false,
         },
+        {
+          model: Bookmark,
+          as: "bookmarks",
+          attributes: ["id", "user_id"],
+          where: currentUserId ? { user_id: currentUserId } : undefined,
+          required: false,
+        },
       ],
     });
 
@@ -172,6 +212,13 @@ class PostsService {
           where: currentUserId ? { user_id: currentUserId } : undefined,
           required: false,
         },
+        {
+          model: Bookmark,
+          as: "bookmarks",
+          attributes: ["id", "user_id"],
+          where: currentUserId ? { user_id: currentUserId } : undefined,
+          required: false,
+        },
       ],
     });
 
@@ -180,7 +227,6 @@ class PostsService {
 
   async getRelated(topic_id, excludeSlug, limit = 3, currentUserId = null) {
     const posts = await Post.findAll({
-      order: [["published_at", "DESC"]],
       where: {
         slug: {
           [Op.ne]: excludeSlug,
@@ -204,6 +250,13 @@ class PostsService {
         {
           model: Like,
           as: "likes",
+          attributes: ["id", "user_id"],
+          where: currentUserId ? { user_id: currentUserId } : undefined,
+          required: false,
+        },
+        {
+          model: Bookmark,
+          as: "bookmarks",
           attributes: ["id", "user_id"],
           where: currentUserId ? { user_id: currentUserId } : undefined,
           required: false,
