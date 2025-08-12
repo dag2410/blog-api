@@ -138,19 +138,18 @@ module.exports = (sequelize, DataTypes) => {
     //   foreignKey: "user_id",
     //   as: "settings",
     // });
-    // // Self-referencing associations for follows
-    // User.belongsToMany(models.User, {
-    //   through: models.Follow,
-    //   foreignKey: "following_id",
-    //   otherKey: "followed_id",
-    //   as: "following",
-    // });
-    // User.belongsToMany(models.User, {
-    //   through: models.Follow,
-    //   foreignKey: "followed_id",
-    //   otherKey: "following_id",
-    //   as: "followers",
-    // });
+    User.belongsToMany(models.User, {
+      through: models.Follow,
+      foreignKey: "following_id",
+      otherKey: "followed_id",
+      as: "following",
+    });
+    User.belongsToMany(models.User, {
+      through: models.Follow,
+      foreignKey: "followed_id",
+      otherKey: "following_id",
+      as: "followers",
+    });
   };
 
   return User;
