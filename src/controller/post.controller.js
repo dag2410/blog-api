@@ -1,4 +1,5 @@
 const postsService = require("@/service/post.service");
+const generateUniqueSlug = require("@/utils/generateUniqueSlug");
 const { success } = require("@/utils/response");
 
 exports.getList = async (req, res) => {
@@ -28,8 +29,22 @@ exports.getOne = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  const post = await postsService.create(req.body);
-  success(res, 201, post);
+  try {
+    const data = {
+      ...req.body,
+      user_id: req.user.id,
+      slug: await generateUniqueSlug(req.body.title),
+      cover: req.body.coverImage || null,
+      meta_title: req.body.metaTitle || null,
+      meta_description: req.body.metaDescription || null,
+    };
+
+    const post = await postsService.create(data);
+    success(res, 201, post);
+  } catch (error) {
+    console.error("Lỗi trong controller:", error);
+    error(res, 500, error.message);
+  }
 };
 
 exports.update = async (req, res) => {
@@ -44,15 +59,19 @@ exports.remove = async (req, res) => {
 
 exports.getUserPosts = async (req, res) => {
   const { userId } = req.params;
+  const { status = "all", search = "" } = req.query;
   const page = +req.query.page || 1;
-  const limit = +req.query.limit || 10;
+  const limit = +req.query.limit || 20;
   const maxLimit = 50;
   const safeLimit = limit > maxLimit ? maxLimit : limit;
 
-  const { items, total } = await postsService.getByUserId(
+  const { items, total, counts } = await postsService.getByUserId(
     userId,
     page,
-    safeLimit
+    safeLimit,
+    req.user?.id || null,
+    status,
+    search
   );
 
   success(res, 200, {
@@ -65,6 +84,7 @@ exports.getUserPosts = async (req, res) => {
       hasNextPage: page < Math.ceil(total / safeLimit),
       hasPrevPage: page > 1,
     },
+    counts,
   });
 };
 

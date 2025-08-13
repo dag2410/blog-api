@@ -1,4 +1,4 @@
-const { Topic } = require("@/models");
+const { Topic, Post } = require("@/models");
 const { default: slugify } = require("slugify");
 
 async function generateUniqueSlug(input) {
@@ -8,7 +8,10 @@ async function generateUniqueSlug(input) {
   });
   let slug = baseSlug;
   let count = 1;
-  while (await Topic.findOne({ where: { slug } })) {
+  while (
+    (await Topic.findOne({ where: { slug } })) ||
+    (await Post.findOne({ where: { slug } }))
+  ) {
     slug = `${baseSlug}-${count++}`;
   }
   return slug;

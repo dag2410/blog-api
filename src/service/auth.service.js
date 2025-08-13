@@ -28,6 +28,28 @@ class AuthService {
         "Tài khoản của bạn chưa được xác thực. Vui lòng kiểm tra email để xác thực."
       );
     }
+    if (!user.username) {
+      const base = user.last_name
+        ? user.last_name.toLowerCase().replace(/\s+/g, "")
+        : "user";
+
+      let newUsername;
+      let isTaken = true;
+
+      while (isTaken) {
+        const randomNum = Math.floor(1000 + Math.random() * 9000);
+        newUsername = `${base}${randomNum}`;
+
+        const existing = await User.findOne({
+          where: { username: newUsername },
+        });
+        if (!existing) {
+          isTaken = false;
+        }
+      }
+
+      await user.update({ username: newUsername });
+    }
     const tokenData = jwtService.generateAccessToken(user.id);
     const refreshToken = await refreshTokenService.createRefreshToken(user.id);
     await User.update(

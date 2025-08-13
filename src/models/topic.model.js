@@ -42,7 +42,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "topic_id",
       otherKey: "post_id",
       as: "posts",
-      // attributes: ["id", "post_id", "topic_id"], // Sequelize sẽ tìm `created_at` từ `topics_posts`
     });
   };
 

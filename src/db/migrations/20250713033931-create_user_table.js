@@ -61,7 +61,7 @@ module.exports = {
         allowNull: true,
         defaultValue: null,
       },
-      post_count: {
+      posts_count: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },

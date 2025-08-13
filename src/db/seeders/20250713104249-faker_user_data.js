@@ -17,7 +17,7 @@ module.exports = {
         username: faker.internet.userName(),
         title: faker.person.jobTitle(),
         about: faker.lorem.paragraph(),
-        post_count: faker.number.int({ min: 0, max: 20 }),
+        posts_count: faker.number.int({ min: 0, max: 20 }),
         followers_count: faker.number.int({ min: 0, max: 500 }),
         following_count: faker.number.int({ min: 0, max: 200 }),
         likes_count: faker.number.int({ min: 0, max: 1000 }),

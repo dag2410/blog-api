@@ -1,5 +1,4 @@
-const { Comment, User, Post } = require("@/models");
-const { where } = require("sequelize");
+const { Comment, User, Post, Like } = require("@/models");
 
 class CommentsService {
   async getAll(postId) {
@@ -7,12 +6,18 @@ class CommentsService {
       where: {
         post_id: postId,
       },
-      include: {
-        model: User,
-        as: "user",
-        attributes: ["id", "username", "avatar"],
-      },
-      order: [["created_at", "ASC"]],
+      include: [
+        {
+          model: Like,
+          as: "likes",
+        },
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "username", "avatar"],
+        },
+      ],
+      order: [["created_at", "DESC"]],
     });
     return comments;
   }
