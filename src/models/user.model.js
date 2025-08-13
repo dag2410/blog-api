@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      post_count: {
+      posts_count: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
@@ -134,10 +134,10 @@ module.exports = (sequelize, DataTypes) => {
     //   otherKey: "notification_id",
     //   as: "notifications",
     // });
-    // User.hasOne(models.UserSetting, {
-    //   foreignKey: "user_id",
-    //   as: "settings",
-    // });
+    User.hasOne(models.UserSetting, {
+      foreignKey: "user_id",
+      as: "settings",
+    });
     User.belongsToMany(models.User, {
       through: models.Follow,
       foreignKey: "following_id",

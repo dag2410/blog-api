@@ -21,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   UserSetting.associate = (models) => {
-    // UserSetting.belongsTo(models.User, {
-    //   foreignKey: "user_id",
-    //   as: "user",
-    // });
+    UserSetting.belongsTo(models.User, {
+      foreignKey: "user_id",
+      as: "user",
+    });
   };
 
   return UserSetting;

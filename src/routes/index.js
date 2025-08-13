@@ -8,6 +8,7 @@ const topicRouter = require("@/routes/topic.route");
 const likesRouter = require("@/routes/like.route");
 const bookmarkRouter = require("@/routes/bookmark.route");
 const followRouter = require("@/routes/follow.route");
+const settingRouter = require("@/routes/setting.route");
 
 router.use("/comments", commentRouter);
 router.use("/posts", postRouter);
@@ -17,5 +18,6 @@ router.use("/topics", topicRouter);
 router.use("/likes", likesRouter);
 router.use("/bookmarks", bookmarkRouter);
 router.use("/follows", followRouter);
+router.use("/settings", settingRouter);
 
 module.exports = router;
