@@ -15,7 +15,7 @@ module.exports = {
         allowNull: false,
       },
       avatar: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       created_at: {
