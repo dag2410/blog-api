@@ -14,7 +14,7 @@ const port = 3001;
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://airbnb.io.vn",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
