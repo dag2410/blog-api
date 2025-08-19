@@ -19,8 +19,8 @@ app.use(
   })
 );
 app.use(express.static("public"));
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.json({ limit: "20mb" }));
+app.use(express.urlencoded({ limit: "20mb", extended: true }));
 app.use("/api/v1", uploadRoutes);
 app.use("/api/v1", router);
 

@@ -33,7 +33,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       avatar: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      cover_image: {
+        type: DataTypes.TEXT,
         allowNull: true,
       },
       username: {
