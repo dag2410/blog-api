@@ -8,13 +8,14 @@ const handleErrors = require("@/middleware/handleError");
 const notFoundHandler = require("@/middleware/notFoundHandler");
 const uploadRoutes = require("@/routes/upload.route");
 
+const isProduction = process.env.NODE_ENV === "production";
 const app = express();
 const port = 3001;
 
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: isProduction ? "https://airbnb.io.vn" : "http://localhost:5173",
     credentials: true,
   })
 );
