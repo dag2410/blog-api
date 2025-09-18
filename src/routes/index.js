@@ -8,8 +8,11 @@ const topicRouter = require("@/routes/topic.route");
 const likesRouter = require("@/routes/like.route");
 const bookmarkRouter = require("@/routes/bookmark.route");
 const followRouter = require("@/routes/follow.route");
+const notificationRouter = require("@/routes/notification.route");
 const settingRouter = require("@/routes/setting.route");
 const uploadRouter = require("@/routes/upload.route");
+const conversationRouter = require("@/routes/conversation.route");
+const pusherRouter = require("@/routes/pusher.route");
 
 router.use("/comments", commentRouter);
 router.use("/posts", postRouter);
@@ -19,7 +22,10 @@ router.use("/topics", topicRouter);
 router.use("/likes", likesRouter);
 router.use("/bookmarks", bookmarkRouter);
 router.use("/follows", followRouter);
+router.use("/notifications", notificationRouter);
 router.use("/settings", settingRouter);
 router.use("/upload", uploadRouter);
+router.use("/conversations", conversationRouter);
+router.use("/pusher", pusherRouter);
 
 module.exports = router;

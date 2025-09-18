@@ -1,4 +1,6 @@
 const { Follow, User } = require("@/models");
+const notificationService = require("./notification.service");
+const pusher = require("@/config/pusher");
 
 class FollowService {
   async toggleFollow({ following_id, followed_id }) {
@@ -14,16 +16,43 @@ class FollowService {
       await User.decrement("followers_count", {
         where: { id: followed_id },
       });
+
+      await notificationService.delete({
+        actor_id: following_id,
+        receiver_id: followed_id,
+        notifiable_type: "User",
+        notifiable_id: following_id,
+        type: "follow",
+      });
+
+      pusher.trigger(`user-${followed_id}`, "new-notification", {
+        action: "unfollowed",
+        actor_id: following_id,
+      });
+
       return "Bỏ theo dỗi";
     } else {
       await Follow.create({ following_id, followed_id });
       await User.increment("following_count", {
         where: { id: following_id },
       });
-
       await User.increment("followers_count", {
         where: { id: followed_id },
       });
+
+      await notificationService.create(followed_id, {
+        type: "follow",
+        title: ` started following you`,
+        notifiable_type: "User",
+        notifiable_id: following_id,
+        actor_id: following_id,
+      });
+
+      pusher.trigger(`user-${followed_id}`, "new-notification", {
+        action: "followed",
+        actor_id: following_id,
+      });
+
       return "Theo dỗi thành công";
     }
   }

@@ -122,22 +122,22 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "user_id",
       as: "bookmarks",
     });
-    // User.hasMany(models.Message, {
-    //   foreignKey: "user_id",
-    //   as: "messages",
-    // });
-    // User.belongsToMany(models.Conversation, {
-    //   through: models.UserConversation,
-    //   foreignKey: "user_id",
-    //   otherKey: "conversation_id",
-    //   as: "conversations",
-    // });
-    // User.belongsToMany(models.Notification, {
-    //   through: models.UserNotification,
-    //   foreignKey: "user_id",
-    //   otherKey: "notification_id",
-    //   as: "notifications",
-    // });
+    User.hasMany(models.Message, {
+      foreignKey: "user_id",
+      as: "messages",
+    });
+    User.belongsToMany(models.Conversation, {
+      through: "user_conversation",
+      foreignKey: "user_id",
+      otherKey: "conversation_id",
+      as: "conversations",
+    });
+    User.belongsToMany(models.Notification, {
+      through: "user_notification",
+      foreignKey: "user_id",
+      otherKey: "notification_id",
+      as: "notifications",
+    });
     User.hasOne(models.UserSetting, {
       foreignKey: "user_id",
       as: "settings",

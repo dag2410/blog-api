@@ -5,6 +5,8 @@ const models = {
   post: require("@/service/post.service"),
   comment: require("@/service/comment.service"),
   topic: require("@/service/topic.service"),
+  notification: require("@/service/notification.service"),
+  conversation: require("@/service/conversation.service"),
 };
 
 const useSlug = ["post", "topic"];

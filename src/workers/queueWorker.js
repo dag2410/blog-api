@@ -1,3 +1,6 @@
+require("dotenv").config({
+  path: require("path").join(__dirname, "../../.env"),
+});
 require("module-alias/register");
 const sendVerifyEmailJob = require("@/jobs/sendVerifyEmailJob");
 const { Queue } = require("@/models");

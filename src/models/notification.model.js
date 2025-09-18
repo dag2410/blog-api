@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(255),
         allowNull: false,
       },
+      actor_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       notifiable_type: {
         type: DataTypes.STRING(100),
         allowNull: false,
@@ -32,12 +36,16 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Notification.associate = (models) => {
-    // Notification.belongsToMany(models.User, {
-    //   through: models.UserNotification,
-    //   foreignKey: "notification_id",
-    //   otherKey: "user_id",
-    //   as: "users",
-    // });
+    Notification.belongsToMany(models.User, {
+      through: "user_notification",
+      foreignKey: "notification_id",
+      otherKey: "user_id",
+      as: "receivers",
+    });
+    Notification.belongsTo(models.User, {
+      foreignKey: "actor_id",
+      as: "actor",
+    });
   };
 
   return Notification;
