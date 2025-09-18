@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       avatar: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       last_message_at: {
         type: DataTypes.DATE,
@@ -24,16 +24,16 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Conversation.associate = (models) => {
-    // Conversation.belongsToMany(models.User, {
-    //   through: models.UserConversation,
-    //   foreignKey: "conversation_id",
-    //   otherKey: "user_id",
-    //   as: "users",
-    // });
-    // Conversation.hasMany(models.Message, {
-    //   foreignKey: "conversation_id",
-    //   as: "messages",
-    // });
+    Conversation.belongsToMany(models.User, {
+      through: "user_conversation",
+      foreignKey: "conversation_id",
+      otherKey: "user_id",
+      as: "users",
+    });
+    Conversation.hasMany(models.Message, {
+      foreignKey: "conversation_id",
+      as: "messages",
+    });
   };
 
   return Conversation;

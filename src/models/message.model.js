@@ -23,23 +23,27 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      delete_at: {
+      deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      read_at: {
         type: DataTypes.DATE,
         allowNull: true,
       },
     },
-    { tableName: "message", underscored: true, timestamps: true }
+    { tableName: "messages", underscored: true, timestamps: true }
   );
 
   Message.associate = (models) => {
-    // Message.belongsTo(models.User, {
-    //   foreignKey: "user_id",
-    //   as: "user",
-    // });
-    // Message.belongsTo(models.Conversation, {
-    //   foreignKey: "conversation_id",
-    //   as: "conversation",
-    // });
+    Message.belongsTo(models.User, {
+      foreignKey: "user_id",
+      as: "sender",
+    });
+    Message.belongsTo(models.Conversation, {
+      foreignKey: "conversation_id",
+      as: "conversation",
+    });
   };
 
   return Message;
