@@ -13,6 +13,7 @@ const settingRouter = require("@/routes/setting.route");
 const uploadRouter = require("@/routes/upload.route");
 const conversationRouter = require("@/routes/conversation.route");
 const pusherRouter = require("@/routes/pusher.route");
+const chatbotRouter = require("@/routes/chatbot.route");
 
 router.use("/comments", commentRouter);
 router.use("/posts", postRouter);
@@ -27,5 +28,6 @@ router.use("/settings", settingRouter);
 router.use("/upload", uploadRouter);
 router.use("/conversations", conversationRouter);
 router.use("/pusher", pusherRouter);
+router.use("/ai/chat", chatbotRouter);
 
 module.exports = router;
